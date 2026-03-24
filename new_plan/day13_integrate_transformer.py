@@ -170,7 +170,9 @@ if __name__ == "__main__":
 
     # 1. 构造模拟输入序列（含pad占位符）
     x = torch.randint(low=1, high=100, size=(batch_size, seq_len), device=device)
+    print(f"输入序列: {x}")
     x[0, 4:] = pad_idx  # 手动添加pad
+    print(f"输入序列_pad: {x}")
     print(f"输入序列shape：{x.shape}")
 
     # 2. 生成掩码（padding+因果）
@@ -178,6 +180,9 @@ if __name__ == "__main__":
     causal_mask = create_causal_mask(seq_len).to(device)
     # 组合掩码
     mask = padding_mask & causal_mask
+    print(f"padding_mask: {padding_mask}")
+    print(f"causal_mask: {causal_mask}")
+    print(f"mask: {mask}")
     print(f"组合掩码shape：{mask.shape}")
 
     # 3. 初始化完整模块
